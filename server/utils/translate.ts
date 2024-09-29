@@ -24,12 +24,12 @@ const config = {
   },
 };
 
-const getICount = (translateText) => (translateText || "").split("i").length - 1;
+const getICount = (translateText: string) => (translateText || "").split("i").length - 1;
 
 const getRandomNumber = (min = 8300000, max = 8399998) =>
   Math.floor(Math.random() * (max - min + 1)) + min * 1000;
 
-const getTimestamp = (iCount) => {
+const getTimestamp = (iCount: number) => {
   const ts = Date.now();
   return iCount === 0 ? ts : ts - (ts % (iCount + 1)) + (iCount + 1);
 };
@@ -82,7 +82,7 @@ const translate = async (
 
     const result = {
       text: response.data.result.texts[0].text,
-      alternatives: response.data.result.texts[0].alternatives.map((alt) => alt.text),
+      alternatives: response.data.result.texts[0].alternatives.map((alt: any) => alt.text),
     };
 
     if (printResult) {
@@ -90,7 +90,7 @@ const translate = async (
     }
 
     return result;
-  } catch (err) {
+  } catch (err: any) {
     console.error("Translation error:", err.message);
     throw new Error("Translation request failed.");
   }

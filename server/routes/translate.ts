@@ -1,10 +1,8 @@
-// server/api/translate.js
 import { defineEventHandler } from "h3";
 import { translate } from "../utils/translate";
-// import { translate } from "./translate";
 
 export default defineEventHandler(async (event) => {
-  if (event.req.method === "GET") {
+  if (event.method === "GET") {
     // GET 请求逻辑
     return {
       code: 200,
@@ -13,7 +11,7 @@ export default defineEventHandler(async (event) => {
     };
   }
 
-  if (event.req.method === "POST") {
+  if (event.method === "POST") {
     const startTime = Date.now();
 
     const bodys = await readBody(event); // 从请求体中读取数据
@@ -44,7 +42,7 @@ export default defineEventHandler(async (event) => {
       };
 
       return responseData;
-    } catch (error) {
+    } catch (error: any) {
       const duration = Date.now() - startTime;
       console.error(
         `[ERROR] ${new Date().toISOString()} | 500 | ${duration}ms | POST "translate" | ${
