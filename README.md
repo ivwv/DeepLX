@@ -68,7 +68,7 @@ pnpm run preview
 # yarn
 yarn preview
 
-# bun
+# bun 
 bun run preview
 ```
 
