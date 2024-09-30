@@ -52,7 +52,7 @@ export default defineEventHandler(async (event) => {
       );
       return {
         code: 500,
-        message: "Translation failed",
+        message: error.message,
         error: error.message,
       };
     }
