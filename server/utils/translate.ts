@@ -72,17 +72,15 @@ const translate = async (
       timeout: 5000,
     });
 
-    if (response.status === 429) {
-      throw new Error("Too many requests, temporarily blocked by DeepL.");
-    }
-
     if (response.status !== 200) {
       throw new Error(`Request failed with status ${response.status}`);
     }
+    const { data: ipinfo } = await axios.get("https://httpbin.org/ip");
 
     const result = {
       text: response.data.result.texts[0].text,
       alternatives: response.data.result.texts[0].alternatives.map((alt: any) => alt.text),
+      ipinfo,
     };
 
     if (printResult) {
@@ -92,7 +90,7 @@ const translate = async (
     return result;
   } catch (err: any) {
     console.error("Translation error:", err.message);
-    throw new Error("Translation request failed.");
+    throw new Error(`Translation error: ${err.message}`);
   }
 };
 

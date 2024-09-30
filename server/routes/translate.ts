@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
       console.log(`[LOG] ${new Date().toISOString()} | 404 | ${duration}ms | POST "translate"`);
       return {
         code: 404,
-        message: "Path not found",
+        message: "The original text cannot be empty!",
       };
     }
 
@@ -39,6 +39,7 @@ export default defineEventHandler(async (event) => {
         source_lang,
         target_lang,
         alternatives: result.alternatives,
+        ipinfo: result.ipinfo,
       };
 
       return responseData;
